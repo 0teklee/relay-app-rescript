@@ -3,15 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"npm run relay:watch\" \"npm run res:dev\" \"next dev\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "res:dev": "rescript build -w",
+    "res:build": "rescript build",
+    "res:clean": "rescript clean -with-deps",
+    "relay": "rescript-relay-compiler",
+    "relay:watch": "rescript-relay-compiler --watch"
   },
   "dependencies": {
+    "@rescript/react": "^0.10.3",
+    "bs-fetch": "^0.6.2",
+    "concurrently": "^7.4.0",
+    "dotenv": "^16.0.3",
+    "dotenv-webpack": "^8.0.1",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-relay": "^13.2.0",
+    "relay-runtime": "^13.2.0",
+    "rescript": "^10.0.1",
+    "rescript-relay": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "8.25.0",

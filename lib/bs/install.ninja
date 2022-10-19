@@ -1,0 +1,18 @@
+rescript = 1
+rule cp
+  command = cmd.exe /C copy /Y $i $out >NUL
+rule touch
+ command = cmd.exe /C type nul >>$out & copy $out+,, >NUL
+o RelayEnv.cmi : cp ..\bs\src\relay\RelayEnv.cmi
+o RelayEnv.cmj : cp ..\bs\src\relay\RelayEnv.cmj
+o RelayEnv.cmt : cp ..\bs\src\relay\RelayEnv.cmt
+o RelayEnv.res : cp ..\..\src\relay\RelayEnv.res
+o index.cmi : cp ..\bs\src\components\index.cmi
+o index.cmj : cp ..\bs\src\components\index.cmj
+o index.cmt : cp ..\bs\src\components\index.cmt
+o index.res : cp ..\..\src\components\index.res
+o Next.cmi : cp ..\bs\src\bindings\Next.cmi
+o Next.cmj : cp ..\bs\src\bindings\Next.cmj
+o Next.cmt : cp ..\bs\src\bindings\Next.cmt
+o Next.res : cp ..\..\src\bindings\Next.res
+build install.stamp : touch RelayEnv.cmi RelayEnv.cmj index.cmi index.cmj Next.cmi Next.cmj 

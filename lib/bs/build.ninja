@@ -1,0 +1,22 @@
+rescript = 1
+g_finger := C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\@rescript\react\lib\ocaml\install.stamp
+g_finger := C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\rescript-relay\lib\ocaml\install.stamp
+g_finger := C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\bs-fetch\lib\ocaml\install.stamp
+rule astj
+  command = "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\rescript\win32\bsc.exe"  -bs-v 10.0.1,1666001514.95 -ppx "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\rescript-relay\ppx" -bs-jsx 3  -absname -bs-ast -o $out $i
+o src\relay\RelayEnv.ast : astj ..\..\src\relay\RelayEnv.res
+rule deps
+  command = "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\rescript\win32\bsb_helper.exe" -hash 3e3418c8490248cbf2f79834c3578c03 $in
+  restat = 1
+o src\relay\RelayEnv.d : deps src\relay\RelayEnv.ast
+rule mij
+  command = "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\rescript\win32\bsc.exe" -I "src\bindings" -I "src\components" -I "src\relay" -I src -I "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\@rescript\react\lib\ocaml" -I "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\rescript-relay\lib\ocaml" -I "C:\Users\12063\Desktop\work\coding\relay-app-rescript\node_modules\bs-fetch\lib\ocaml"   -bs-package-name nrr -bs-package-output es6:$in_d:.bs.js -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src\relay\RelayEnv.cmj src\relay\RelayEnv.cmi ..\..\src\relay\RelayEnv.bs.js : mij src\relay\RelayEnv.ast
+o src\components\index.ast : astj ..\..\src\components\index.res
+o src\components\index.d : deps src\components\index.ast
+o src\components\index.cmj src\components\index.cmi ..\..\src\components\index.bs.js : mij src\components\index.ast
+o src\bindings\Next.ast : astj ..\..\src\bindings\Next.res
+o src\bindings\Next.d : deps src\bindings\Next.ast
+o src\bindings\Next.cmj src\bindings\Next.cmi ..\..\src\bindings\Next.bs.js : mij src\bindings\Next.ast
